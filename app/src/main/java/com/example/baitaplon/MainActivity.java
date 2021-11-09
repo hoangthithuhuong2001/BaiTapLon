@@ -37,17 +37,17 @@ public class MainActivity<AGConnectUser, HWIDActivity, SettingsClient, VerifyCod
 
         btnCheckLocation = findViewById(R.id.btnCheck);
 
-
         btnCheckLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signInId();
-
             }
+
         });
 
-
     }
+
+
     ActivityResultLauncher<Intent> signInIDResult = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -59,6 +59,8 @@ public class MainActivity<AGConnectUser, HWIDActivity, SettingsClient, VerifyCod
                         AuthAccount authAccount = authAccountTask.getResult();
                         Log.i(TAG, authAccount.getDisplayName() + "signIn success");
                         Log.i(TAG, "idToken + {" + authAccount.getIdToken() + "}");
+                        Intent intent = new Intent(MainActivity.this, TrangChu.class);
+                        startActivity(intent);
                     }
                     else{
                         Log.i(TAG, "sign in failed: " + ((ApiException)authAccountTask.getException()).getStatusCode());
